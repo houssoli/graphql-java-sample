@@ -2,9 +2,11 @@ package fr.saberkan.services.graphql;
 
 
 
+import fr.saberkan.services.graphql.shemas.ContactSchema;
 import fr.saberkan.services.graphql.shemas.MavenSchema;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
+
 
 
 
@@ -47,4 +49,22 @@ public class GraphqlService {
         return resultData==null?resultErrors:resultData;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value="/graphql/contact")
+    public Object contact(@RequestBody(required=false) String query) throws IllegalAccessException, InstantiationException,
+            NoSuchMethodException {
+        LOG.debug("query : " + query);
+
+        // Prepare
+        final ContactSchema schema = new ContactSchema();
+        final GraphQL graphql = new GraphQL(schema.getSchema());
+        final ExecutionResult executionResult = graphql.execute(query);
+
+        // Execute
+        final Object resultData = executionResult.getData();
+        final Object resultErrors = executionResult.getErrors();
+        LOG.debug("resultData  :" + resultData);
+        LOG.debug("resultErrors  :" + resultErrors);
+        return resultData==null?resultErrors:resultData;
+    }
+    
 }
