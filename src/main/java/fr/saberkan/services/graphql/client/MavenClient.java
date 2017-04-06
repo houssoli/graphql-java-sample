@@ -2,6 +2,8 @@ package fr.saberkan.services.graphql.client;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import fr.saberkan.services.graphql.shemas.MavenSchema.Artifact;
 
@@ -11,6 +13,13 @@ import fr.saberkan.services.graphql.shemas.MavenSchema.Artifact;
  *
  */
 public class MavenClient {
+    
+
+    private static List<Artifact>  artifacts   =Arrays.asList(
+            new Artifact("com.graphql.java", "graphql-java", "1.2"),
+            new Artifact("com.graphql.java", "graphql-java", "1.3"),
+            new Artifact("com.apache.commons", "apache-commons", "5.0")
+            );
 
     /**
      * Cette méthode joue le role de recupération des données (DB, REST, etc.)
@@ -19,10 +28,9 @@ public class MavenClient {
      * @return 
      */
     public static List<Artifact> findArtifacts(String group, String name) {
-        // TODO LOGIC FILTRING
-        return Arrays.asList(
-                new Artifact("com.graphql.java", "graphql-java", "1.2"),
-                new Artifact("com.graphql.java", "graphql-java", "1.3")
-                );
+        return artifacts.stream()
+            .filter(x -> x.getGroup().contains(group))
+            .filter(x -> x.getName().contains(name))
+            .collect(Collectors.toList());
     }
 }
