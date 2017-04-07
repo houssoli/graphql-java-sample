@@ -29,8 +29,7 @@ public class MavenClient {
      */
     public static List<Artifact> findArtifacts(String group, String name) {
         return artifacts.stream()
-            .filter(x -> x.getGroup().contains(group))
-            .filter(x -> x.getName().contains(name))
+            .filter(x -> x.getGroup().contains(group) && x.getName().contains(name))
             .collect(Collectors.toList());
     }
 }

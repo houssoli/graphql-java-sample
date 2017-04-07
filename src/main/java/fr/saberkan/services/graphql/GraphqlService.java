@@ -1,16 +1,10 @@
 package fr.saberkan.services.graphql;
 
 
-
 import fr.saberkan.services.graphql.shemas.ContactSchema;
 import fr.saberkan.services.graphql.shemas.MavenSchema;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
-
-
-
-
-
 
 
 import org.slf4j.Logger;
@@ -22,17 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * 
  * @author saberkan
- *
  */
 @RestController
 public class GraphqlService {
-    private static  final   Logger      LOG     =LoggerFactory.getLogger(GraphqlService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GraphqlService.class);
 
 
-    @RequestMapping(method = RequestMethod.POST, value="/graphql/maven")
-    public Object maven(@RequestBody(required=false) String query) throws IllegalAccessException, InstantiationException,
+    @RequestMapping(method = RequestMethod.POST, value = "/graphql/maven")
+    public Object maven(@RequestBody(required = false) String query) throws IllegalAccessException, InstantiationException,
             NoSuchMethodException {
         LOG.debug("query : " + query);
 
@@ -46,11 +38,11 @@ public class GraphqlService {
         final Object resultErrors = executionResult.getErrors();
         LOG.debug("resultData  :" + resultData);
         LOG.debug("resultErrors  :" + resultErrors);
-        return resultData==null?resultErrors:resultData;
+        return resultData == null ? resultErrors : resultData;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value="/graphql/contact")
-    public Object contact(@RequestBody(required=false) String query) throws IllegalAccessException, InstantiationException,
+    @RequestMapping(method = RequestMethod.POST, value = "/graphql/contacts")
+    public Object contact(@RequestBody(required = false) String query) throws IllegalAccessException, InstantiationException,
             NoSuchMethodException {
         LOG.debug("query : " + query);
 
@@ -64,7 +56,7 @@ public class GraphqlService {
         final Object resultErrors = executionResult.getErrors();
         LOG.debug("resultData  :" + resultData);
         LOG.debug("resultErrors  :" + resultErrors);
-        return resultData==null?resultErrors:resultData;
+        return resultData == null ? resultErrors : resultData;
     }
-    
+
 }

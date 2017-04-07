@@ -8,12 +8,18 @@ import graphql.schema.DataFetchingEnvironment;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ContactDataFetcher implements DataFetcher {
-    
+    private static final Logger LOG = LoggerFactory.getLogger(ContactDataFetcher.class);
+
     public Object get(final DataFetchingEnvironment dataFetchingEnvironment) {
-     final String fname = (String) dataFetchingEnvironment.getArguments().get(ContactSchema.FNAME_ARGUMENT);
-     final String skill = (String) dataFetchingEnvironment.getArguments().get(ContactSchema.SKILL_ARGUMENT);
-     final List<Person> artifacts = ContactClient.findContacts(fname, skill);
-     return artifacts;
+        final String fname = (String) dataFetchingEnvironment.getArguments().get(ContactSchema.FNAME_ARGUMENT);
+        final String skill = (String) dataFetchingEnvironment.getArguments().get(ContactSchema.SKILL_ARGUMENT);
+        final List<Person> persons = ContactClient.findContacts(fname, skill);
+
+        LOG.debug("persons => {}", persons);
+        return persons;
     }
 }
