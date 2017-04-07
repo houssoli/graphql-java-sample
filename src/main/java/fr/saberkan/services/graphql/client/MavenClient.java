@@ -2,10 +2,9 @@ package fr.saberkan.services.graphql.client;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import fr.saberkan.services.graphql.shemas.MavenSchema.Artifact;
+import fr.saberkan.services.graphql.shemas.maven.Artifact;
 
 /**
  * 
@@ -13,7 +12,6 @@ import fr.saberkan.services.graphql.shemas.MavenSchema.Artifact;
  *
  */
 public class MavenClient {
-    
 
     private static List<Artifact>  artifacts   =Arrays.asList(
             new Artifact("com.graphql.java", "graphql-java", "1.2"),

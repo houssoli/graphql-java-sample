@@ -3,7 +3,7 @@ package fr.saberkan.services.graphql.fetchers;
 import java.util.List;
 
 import fr.saberkan.services.graphql.client.MavenClient;
-import fr.saberkan.services.graphql.shemas.MavenSchema.Artifact;
+import fr.saberkan.services.graphql.shemas.maven.Artifact;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 

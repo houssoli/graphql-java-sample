@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.saberkan.services.graphql.shemas.ContactSchema.Person;
-import fr.saberkan.services.graphql.shemas.ContactSchema.Skill;
+import fr.saberkan.services.graphql.shemas.contact.Person;
+import fr.saberkan.services.graphql.shemas.contact.Skill;
 
 public class ContactClient {
     private static List<Person> persons = Arrays.asList(
