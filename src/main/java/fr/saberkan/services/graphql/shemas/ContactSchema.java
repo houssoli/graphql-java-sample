@@ -1,15 +1,11 @@
 package fr.saberkan.services.graphql.shemas;
 
+import fr.saberkan.services.graphql.fetchers.ContactDataFetcher;
+import graphql.schema.*;
+
 import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 import static graphql.schema.GraphQLObjectType.newObject;
-
-import fr.saberkan.services.graphql.fetchers.ContactDataFetcher;
-import graphql.schema.GraphQLArgument;
-import graphql.schema.GraphQLFieldDefinition;
-import graphql.schema.GraphQLList;
-import graphql.schema.GraphQLObjectType;
-import graphql.schema.GraphQLSchema;
 
 public class ContactSchema {
     public static final String FNAME_ARGUMENT = "firstName";
@@ -18,11 +14,11 @@ public class ContactSchema {
     private final GraphQLSchema schema;
 
     public ContactSchema() {
-        final GraphQLObjectType rootQuery = newObject().name("rootQuery").field(allContacts()).build();
+        final GraphQLObjectType rootQuery = newObject().name("rootQuery").field(createQueryAllContacts()).build();
         schema = GraphQLSchema.newSchema().query(rootQuery).build();
     }
 
-    static GraphQLFieldDefinition allContacts() {
+    static GraphQLFieldDefinition createQueryAllContacts() {
         final ContactDataFetcher dataFetcher = new ContactDataFetcher();
         final GraphQLArgument firstNameArg = GraphQLArgument.newArgument().name(FNAME_ARGUMENT).type(GraphQLString).build();
         final GraphQLArgument skillArg = GraphQLArgument.newArgument().name(SKILL_ARGUMENT).type(GraphQLString).build();
