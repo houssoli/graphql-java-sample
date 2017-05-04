@@ -1,19 +1,17 @@
 package fr.saberkan.services.graphql.shemas;
 
+import fr.saberkan.services.graphql.fetchers.ArtifactDataFetcher;
+import fr.saberkan.services.graphql.fetchers.mutation.ArtifactDataMutationFetcher;
+import graphql.schema.*;
+
 import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 import static graphql.schema.GraphQLObjectType.newObject;
 
-import fr.saberkan.services.graphql.fetchers.ArtifactDataFetcher;
-import graphql.schema.GraphQLArgument;
-import graphql.schema.GraphQLFieldDefinition;
-import graphql.schema.GraphQLList;
-import graphql.schema.GraphQLObjectType;
-import graphql.schema.GraphQLSchema;
-
 public class MavenSchema {
     public static final String GROUP_ARGUMENT = "group";
     public static final String NAME_ARGUMENT = "name";
+    public static final String VERSION_ARGUMENT = "version";
 
     private final GraphQLSchema schema;
 
@@ -34,6 +32,22 @@ public class MavenSchema {
                 .argument(groupArg)
                 .argument(nameArg)
                 .dataFetcher(dataFetcher)
+                .build();
+    }
+
+    static GraphQLFieldDefinition createArtifactMutation() {
+        final ArtifactDataMutationFetcher dataMutationFetcher = new ArtifactDataMutationFetcher();
+        final GraphQLArgument groupArg = GraphQLArgument.newArgument().name(GROUP_ARGUMENT).type(GraphQLString).build();
+        final GraphQLArgument nameArg = GraphQLArgument.newArgument().name(NAME_ARGUMENT).type(GraphQLString).build();
+        final GraphQLArgument versionArg = GraphQLArgument.newArgument().name(VERSION_ARGUMENT).type(GraphQLString).build();
+
+        return GraphQLFieldDefinition.newFieldDefinition()
+                .name("artifactMutation")
+                .type(new GraphQLList(createQueryResultType()))
+                .argument(groupArg)
+                .argument(nameArg)
+                .argument(versionArg)
+                .dataFetcher(dataMutationFetcher)
                 .build();
     }
 

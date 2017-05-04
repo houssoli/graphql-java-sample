@@ -45,7 +45,7 @@ $ mvn spring-boot:run -Dserver.port=8089
 > METHODE : POST
 > URL : http://localhost:8089/graphql/singleEndpoint
 > BODY :
-{
+query {
     allArtifacts(group: "com.graphql.java", name: "graphql-java") {
         group
         name
@@ -59,5 +59,19 @@ $ mvn spring-boot:run -Dserver.port=8089
             yearsOfExperience
         }
     }
+}
+</pre>
+
+# EXEMPLE MUTATION artifact
+<pre>
+> METHODE : POST
+> URL : http://localhost:8089/graphql/singleEndpoint
+> BODY :
+mutation {
+   artifactMutation(group: "testGroupe", name: "testName", version: "1.0") {
+   		group
+   		name
+   		version
+   }
 }
 </pre>
