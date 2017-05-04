@@ -55,7 +55,7 @@ public class MavenSchema {
         final GraphQLFieldDefinition groupField = newFieldDefinition().name("group").type(GraphQLString).build();
         final GraphQLFieldDefinition nameField = newFieldDefinition().name("name").type(GraphQLString).build();
         final GraphQLFieldDefinition versionField = newFieldDefinition().name("version").type(GraphQLString).build();
-        return newObject().name("queryResult")
+        return newObject().name("mavenQueryResult")
                 .field(groupField)
                 .field(nameField)
                 .field(versionField)

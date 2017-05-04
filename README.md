@@ -75,3 +75,27 @@ mutation {
    }
 }
 </pre>
+
+# EXEMPLE FRAGMENT
+<pre>
+> METHODE : POST
+> URL : http://localhost:8089/graphql/singleEndpoint
+> BODY :
+query {
+    allArtifacts(group: "", name: "") {
+		...fragmentMaven
+    }
+    contacts(firstName: "FNAME" skill: "java") {
+        ...fragmentContact
+    }
+}
+fragment fragmentContact on contactQueryResult {
+    lastName
+    skills {
+        skill
+    }
+}
+fragment fragmentMaven on mavenQueryResult {
+    group
+}
+</pre>

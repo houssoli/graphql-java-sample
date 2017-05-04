@@ -48,7 +48,7 @@ public class ContactSchema {
                 .name("skills")
                 .type(new GraphQLList(skill))
                 .build();
-        return newObject().name("person")
+        return newObject().name("contactQueryResult")
                 .field(firstNameField)
                 .field(lNameField)
                 .field(skills)
